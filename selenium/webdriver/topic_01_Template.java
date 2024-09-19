@@ -17,7 +17,7 @@ public class topic_01_Template {
 
     @Test
     public void TC_01_RunOnChrome(){
-
+        webDriver.get("https://www.youtube.com/watch?v=ucVQxPCkIXQ");
     }
 
     @AfterClass
