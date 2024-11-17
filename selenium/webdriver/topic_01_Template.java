@@ -12,12 +12,11 @@ public class topic_01_Template {
     @BeforeClass
     public void beforeClass(){
         webDriver = new ChromeDriver();
-        webDriver.get("https://www.youtube.com/watch?v=ucVQxPCkIXQ");
     }
 
     @Test
     public void TC_01_RunOnChrome(){
-        webDriver.get("https://www.youtube.com/watch?v=ucVQxPCkIXQ");
+        webDriver.get("");
     }
 
     @AfterClass
