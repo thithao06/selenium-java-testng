@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,9 +18,7 @@ public class topic_10_Textbox_TextArea {
 
     @BeforeClass
     public void beforeClass(){
-        webDriver = new ChromeDriver();
-        ChromeOptions options = new ChromeOptions();
-        options.setAcceptInsecureCerts(true);
+        webDriver = new FirefoxDriver();
     }
 
     @Test
@@ -29,7 +29,8 @@ public class topic_10_Textbox_TextArea {
         String emailAddress = "tracy.holf" + new Random().nextInt(9999) + "@gmail.vn";
         String password = "tracy!23";
 
-        webDriver.get("https://live.techpanda.org/");
+        webDriver.get("http://live.techpanda.org/");
+        webDriver.manage().window().maximize();
         webDriver.findElement(By.xpath("//div[@class='footer-container']//a[text()='My Account']")).click();
         webDriver.findElement(By.xpath("//span[text()='Create an Account']")).click();
         Thread.sleep(5000);
@@ -42,6 +43,7 @@ public class topic_10_Textbox_TextArea {
         webDriver.findElement(By.xpath("//span[text()='Register']")).click();
 
         Thread.sleep(5000);
+//        webDriver.switchTo().alert().accept();
         Assert.assertEquals(webDriver.findElement(By.cssSelector("li.success-msg li span")).getText(),"Thank you for registering with Main Website Store.");
 
         String contactInformation = webDriver.findElement(By.xpath("//h3[text()='Contact Information']/parent::div/following-sibling::div/p")).getText();
