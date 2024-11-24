@@ -18,7 +18,8 @@ public class topic_10_Textbox_TextArea {
 
     @BeforeClass
     public void beforeClass(){
-        webDriver = new FirefoxDriver();
+        FirefoxDriver driver = new FirefoxDriver();
+        webDriver.manage().window().maximize();
     }
 
     @Test
@@ -30,7 +31,6 @@ public class topic_10_Textbox_TextArea {
         String password = "tracy!23";
 
         webDriver.get("http://live.techpanda.org/");
-        webDriver.manage().window().maximize();
         webDriver.findElement(By.xpath("//div[@class='footer-container']//a[text()='My Account']")).click();
         webDriver.findElement(By.xpath("//span[text()='Create an Account']")).click();
         Thread.sleep(5000);
