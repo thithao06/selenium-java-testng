@@ -4,14 +4,19 @@ import graphql.schema.impl.StronglyConnectedComponentsTopologicallySorted;
 import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 
 public class topic_11_Default_Dropdown {
@@ -22,6 +27,7 @@ public class topic_11_Default_Dropdown {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--user-data-dir=C:/Users/thao.tran/AppData/Local/Google/Chrome/User Data/");
         options.addArguments("--profile-directory=Profile 10");
+        options.addArguments("--disable-geolocation");
         webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
     }
@@ -61,6 +67,24 @@ public class topic_11_Default_Dropdown {
         Assert.assertEquals(new Select(webDriver.findElement(By.xpath("//select[@name='DateOfBirthYear']"))).getFirstSelectedOption().getText(),year);
         Assert.assertEquals(webDriver.findElement(By.cssSelector("input#Email")).getAttribute("value"),email);
         Assert.assertEquals(webDriver.findElement(By.cssSelector("input#Company")).getAttribute("value"),companyName);
+    }
+
+    @Test
+    public void TC_02_Rode() throws InterruptedException {
+        webDriver.get("https://rode.com/en/support/where-to-buy");
+        Assert.assertFalse(new Select(webDriver.findElement(By.cssSelector("select#country"))).isMultiple());
+
+        new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("select#country")));
+        new Select(webDriver.findElement(By.cssSelector("select#country"))).selectByVisibleText("Vietnam");
+        webDriver.findElement(By.cssSelector("input#map_search_query")).sendKeys("HO CHI MINH");
+        webDriver.findElement(By.xpath("//button[text()='Search']")).click();
+        Thread.sleep(3000);
+        List<WebElement> dealers = webDriver.findElements(By.cssSelector("div.d-flex.flex-wrap h4"));
+        Assert.assertEquals(dealers.size(), 16);
+        for (WebElement dealer : dealers) {
+            System.out.println(dealer.getText());
+        }
+
     }
 
     @AfterClass
