@@ -12,6 +12,7 @@ public class topic_01_Template {
     @BeforeClass
     public void beforeClass(){
         webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
     }
 
     @Test
