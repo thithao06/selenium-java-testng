@@ -20,7 +20,8 @@ public class topic_15_Custom_Checkbox_Radio {
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
     }
-
+    // custom checkbox va default checkbox: cung la the input
+    // custom checkbox: bi che boi 1 the khac
     @Test
     public void TC_01_Ubuntu(){
         webDriver.get("https://login.ubuntu.com/");
